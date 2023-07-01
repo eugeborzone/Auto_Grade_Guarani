@@ -201,7 +201,7 @@ for page in range(numero_paginas):
         url = url + '/' + str(page+2)
         # redirecciono
         driver.get(url)
-    elif page == numero_paginas:
+    elif page == numero_paginas-1:
         pass
     else:
         url = url[:-1] + str(page+2)
