@@ -22,3 +22,11 @@ Para hacer un reseteo de notas y condiciones a los valores vacíos por defecto (
 El archivo Go_to_notas_page.py realiza los pasos necesarios para llegar a la página de carga de notas. Esto es util para depurar el código, para cambiar valores (xpath de botones, codificación de notas, etc) para diferentes versiones de SIU Guaraní. 
 # Precauciones
 Probado actualmente con el SIU Guaraní de UNL-FICH. Es posible que para otros haya que hacer ligeros cambios en los XPATH de los botones en el archivo Auto_Grade.py
+# Licencia
+Usted es libre de copiar y modificar lo que quiera de esta repo.
+
+## Autores
+
+Eugenio Borzone
+
+Bruno Zorzet
