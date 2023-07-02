@@ -1,11 +1,11 @@
-from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
+# Importamos las librerías
 import pandas as pd
 import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import Select
+from selenium.webdriver.chrome.service import Service as ChromeService
 from bs4 import BeautifulSoup
 from webdriver_manager.chrome import ChromeDriverManager
 
@@ -13,7 +13,8 @@ from Configuracion import *
 
 
 # Abrir el navegador
-driver = webdriver.Chrome(ChromeDriverManager().install())
+driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
+
 # Configurar las opciones del navegador
 driver.get(url_login)
 # maximizo

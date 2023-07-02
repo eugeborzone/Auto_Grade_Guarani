@@ -1,6 +1,6 @@
 # Definir las credenciales de inicio de sesión
-usuario = ''
-contraseña = ''
+usuario = 'DOC18610404'
+contraseña = 'Leonard1'
 
 # Definir url de inicio de sesión de tu SIU Guaraní
 url_login = 'https://servicios.unl.edu.ar/guarani3/autogestion/acceso'
@@ -32,6 +32,7 @@ espera_larga = 20
 
 # parametro para resetear las notas y las condiciones de los alumnos 
 reset_all = False
+
 # so
 so = 'Windows'
 
