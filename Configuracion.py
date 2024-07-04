@@ -10,7 +10,7 @@ xpath_materia = '//a[@data-original-title="" and text()="Introducción a la Inte
 path_notas = 'notas.csv'
 
 # definir rangos de notas para definir el estado de la materia nota=0 se considera ausente
-notas_libre = [0,1,2,3,4,5]
+notas_libre = [1,2,3,4,5]
 notas_no_promocionan = [6,7]
 notas_promocionan = [8,9,10]
 # definir el estado de la materia en función de la nota
