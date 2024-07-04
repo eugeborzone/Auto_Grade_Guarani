@@ -8,8 +8,6 @@
 
 -Selenium
 
--webdriver_manager
-
 -bs4
 
 # Funcionamiento

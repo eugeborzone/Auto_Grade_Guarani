@@ -1,21 +1,12 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
-import numpy as np
-import pandas as pd
-import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.support.ui import Select
-from selenium.webdriver.chrome.service import Service as ChromeService
-from bs4 import BeautifulSoup
-from webdriver_manager.chrome import ChromeDriverManager
-
 from Configuracion import *
 
 
-driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
+driver = webdriver.Chrome()
 # Preparo funciones de espera
 def espera_corta(espera_corta = espera_corta):
     driver.implicitly_wait(espera_corta)
