@@ -7,13 +7,12 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.chrome.service import Service as ChromeService
 from bs4 import BeautifulSoup
-from webdriver_manager.chrome import ChromeDriverManager
 
 from Configuracion import *
 
 
 # Abrir el navegador
-driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
+driver = webdriver.Chrome()
 
 # Configurar las opciones del navegador
 driver.get(url_login)
@@ -38,17 +37,17 @@ condiciones_cursada_SIU = { '-': '', 'Abandono': '2', 'Insuficiente': '3', 'Libr
                          'Regular': '4', 'Regularidad Incompleta': '122', 'Renuncia': '120'}
 resultados_promocion_SIU = {'-': '', 'Ausente': 'U', 'No Promocionado': 'R', 'Promocionado': 'A'}
 if reset_all:
-    condicion_cursada = {'Abandono': '-',
-                    'Libre': '-', 
-                    'Regular': '-', 
-                    'Promocionado': '-'}
-    resultado_promocion =  {'Abandono': '-',
-                            'Libre': '-', 
-                            'Regular': '-', 
-                            'Promocionado': '-'}
-# cambio los valores de las condiciones por los valores internos del SIU
-condicion_cursada = {k: condiciones_cursada_SIU[v] for k, v in condicion_cursada.items()}
-resultado_promocion = {k: resultados_promocion_SIU[v] for k, v in resultado_promocion.items()}
+    condiciones_cursada_SIU = {'Abandono': '',
+                    'Insuficiente': '', 
+                    'Libre x Inasistencia': '',
+                    'Libre': '',
+                    'Regular': '', 
+                    'Regularidad Incompleta': '',
+                    'Renuncia': ''}
+    resultados_promocion_SIU =  {'Abandono': '',
+                            'Ausente': '', 
+                            'No Promocionado': '', 
+                            'Promocionado': ''}
 
 espera_corta()
 
@@ -140,52 +139,55 @@ for page in range(numero_paginas):
 
         if nota == 0: 
             # Cursada - Abandono
-            campo_select = Select(condicion_cursada['Abandono'])
+            campo_select = Select(condicion_cursada[i])
             espera_corta()
-            campo_select.select_by_value(condicion_cursada['Abandono'])
+            campo_select.select_by_value(condiciones_cursada_SIU['Abandono'])
             espera_corta()
             # Promocion - Abandono
             campo_select = Select(driver.find_elements(By.NAME, f'renglones[{id_[8:]}][resultado_promocion]')[0])
             espera_larga()
-            campo_select.select_by_value(resultado_promocion['Abandono'])
+            campo_select.select_by_value(resultados_promocion_SIU['Ausente'])
             espera_corta()
 
         elif nota in notas_libre:
             # Cursada - Libre
             campo_select = Select(condicion_cursada[i])
             espera_corta()
-            campo_select.select_by_value(condicion_cursada['Libre'])
+            campo_select.select_by_value(condiciones_cursada_SIU['Libre'])
             espera_corta()
 
             # Promocion - Libre
             campo_select = Select(driver.find_elements(By.NAME, f'renglones[{id_[8:]}][resultado_promocion]')[0])
             espera_larga()
-            campo_select.select_by_value(resultado_promocion['Libre'])
+            campo_select.select_by_value(resultados_promocion_SIU['No Promocionado'])
             espera_corta()
 
         elif nota in notas_no_promocionan:
             # Cursada - Regular
             campo_select = Select(condicion_cursada[i])
             espera_corta()
-            campo_select.select_by_value(condicion_cursada['No promocionado'])
+            campo_select.select_by_value(condiciones_cursada_SIU['Regular'])
             espera_corta()
 
             # Promocion - Regular
             campo_select = Select(driver.find_elements(By.NAME, f'renglones[{id_[8:]}][resultado_promocion]')[0])
             espera_larga()
-            campo_select.select_by_value(resultado_promocion['No promocionado'])
+            campo_select.select_by_value(resultados_promocion_SIU['No Promocionado'])
             espera_corta()
 
         else:
             # Cursada - Promociona
             campo_select = Select(condicion_cursada[i])
             espera_corta()
-            campo_select.select_by_value(condicion_cursada['Promocionado'])
+            campo_select.select_by_value(condiciones_cursada_SIU['Regular'])
             espera_corta()
             # Promocion - Promociona
             campo_select = Select(notas_promocion[i])
             espera_corta()
-            campo_select.select_by_value(str(nota))
+            if reset_all:
+                campo_select.select_by_value('')
+            else:
+                campo_select.select_by_value(str(nota))
             espera_corta()
         
     
