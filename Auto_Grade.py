@@ -75,7 +75,7 @@ espera_larga()
 hoy = time.strftime('%d/%m/%Y')
 
 # Recorro las paginas de alumnos
-for page in range(numero_paginas):
+for page in range(numero_paginas+1):
     
     # Genero listas a recorrer
     
