@@ -72,30 +72,11 @@ elemento.click()
 elemento = driver.find_element(By.XPATH, '//*[@id="zona"]/div[1]/ul[2]/li[2]/a')
 elemento.click()
 espera_larga()
-
+hoy = time.strftime('%d/%m/%Y')
 
 # Recorro las paginas de alumnos
 for page in range(numero_paginas):
     
-    # Coloco la fecha de hoy
-    element = driver.find_element(By.ID, 'js-colapsar-herramientas')
-    espera_corta()
-    element.send_keys(Keys.RETURN) 
-    espera_corta()
-    campo_select = Select(driver.find_element(By.ID, 'preset_campo'))
-    espera_corta()
-    campo_select.select_by_value('fecha')
-    espera_corta()
-    campo_select = driver.find_element(By.ID, 'preset-fecha')
-    espera_corta()
-    campo_select.send_keys(time.strftime('%d/%m/%Y')) 
-    espera_corta()
-    campo_select.send_keys(Keys.RETURN)
-    espera_corta()
-    boton = driver.find_element(By.ID, 'btnCompletar')
-    espera_corta()
-    boton.click()
-
     # Genero listas a recorrer
     
     # Obtenemos los id de las clases de regularización:
@@ -121,6 +102,15 @@ for page in range(numero_paginas):
     html = driver.page_source
     soup = BeautifulSoup(html, 'html.parser')
 
+    for id_ in ids_regularizacion:          # id_ = 'renglon_313731'
+        reng = id_[8:]                      # '313731'
+        
+        # Fecha de cursada
+        nombre_fecha = f"renglones[{reng}][fecha_regular]"
+        campo_fecha  = driver.find_element(By.NAME, nombre_fecha)
+        driver.execute_script("arguments[0].value = arguments[1];", 
+                            campo_fecha, hoy)
+
 
     for i,id_ in enumerate(ids_regularizacion):
 
@@ -131,10 +121,10 @@ for page in range(numero_paginas):
 
         #combrobar nota
         #busco la nota por dni
-        if len(notas.loc[notas['dni'] == int(dni), 'nota'].values) == 0:
+        if len(notas.loc[notas['dni'] == dni, 'nota'].values) == 0:
             nota = 0
         else:
-            nota = notas.loc[notas['dni'] == int(dni), 'nota'].values[0]
+            nota = notas.loc[notas['dni'] == dni, 'nota'].values[0]
 
         if nota == 0: 
             # Cursada - Abandono
@@ -183,11 +173,18 @@ for page in range(numero_paginas):
             # Promocion - Promociona
             campo_select = Select(notas_promocion[i])
             espera_corta()
+
+            # fecha_promoción sólo aquí
+            # nombre_fecha_prom = f"renglones[{reng}][fecha_promocion]"
+            # campo_fecha_prom  = driver.find_element(By.NAME, nombre_fecha_prom)
+            # driver.execute_script("arguments[0].value = arguments[1];",
+            #                     campo_fecha_prom, hoy)
             if reset_all:
                 campo_select.select_by_value('')
             else:
                 campo_select.select_by_value(str(nota))
             espera_corta()
+
         
     
     # guardo notas

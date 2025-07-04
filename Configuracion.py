@@ -1,6 +1,11 @@
 # Definir las credenciales de inicio de sesión
-usuario = ''
-contraseña = ''
+#load dotenv
+import os
+from dotenv import load_dotenv
+load_dotenv()
+# tomar usuario y contraseña del archivo .env
+usuario = os.getenv('usuario')
+contraseña = os.getenv('contraseña')
 
 # Definir url de inicio de sesión de tu SIU Guaraní
 url_login = 'https://servicios.unl.edu.ar/guarani3/autogestion/acceso'
@@ -24,7 +29,7 @@ resultado_promocion =  {'Abandono': 'Ausente',
                         'Promocionado': 'Promocionado'}
 
 # definir cuantas paginas tiene el listado de alumnos
-numero_paginas = 9
+numero_paginas = 11
 
 # definir tiempo de espera para que cargue la pagina (aumentar si la conexión es lenta)
 espera_corta = 5

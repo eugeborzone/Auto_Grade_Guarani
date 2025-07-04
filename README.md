@@ -12,7 +12,7 @@
 
 # Funcionamiento
 1) Editar el archivo Configuracion.py con sus parámetros personalizados. Seleccionar el sistema operativo con el parámetro so.
-2) Guardar las notas a subir en un archivo .csv separado por comas (',') con dos columnas con nombre dni y nota.
+2) Las notas se esperan en un archivo notas.csv separado por comas (',') con dos columnas con dni y nota.
 3) Ejecutar el archivo Auto_Grade.py
 # Resetear Todo
 Para hacer un reseteo de notas y condiciones a los valores vacíos por defecto ('-') solo se debe configurar en el archivo de Configuracion.py el parámetro reset_all=True
