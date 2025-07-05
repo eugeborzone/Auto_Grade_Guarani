@@ -16,8 +16,8 @@ path_notas = 'notas.csv'
 
 # definir rangos de notas para definir el estado de la materia nota=0 se considera ausente
 notas_libre = [1,2,3,4,5]
-notas_no_promocionan = [6,7]
-notas_promocionan = [8,9,10]
+notas_no_promocionan = [6]
+notas_promocionan = [7,8,9,10]
 # definir el estado de la materia en función de la nota
 condicion_cursada = {'Abandono': 'Abandono',
                     'Libre': 'Libre', 
